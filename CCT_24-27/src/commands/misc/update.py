@@ -1,7 +1,7 @@
 """
     Command to reload all command extensions.
-    Sep 14 2024 @ 08:15
-    update.py v1
+    Sep 14 2024 @ 09:00
+    update.py v2
 
     Sebastian Lindau-Skands
     slinda24@student.aau.dk

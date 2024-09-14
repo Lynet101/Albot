@@ -1,3 +1,12 @@
+"""
+    Command to meassure bot latency.
+    Sep 14 2024 @ 09:00
+    ping.py v2
+
+    Sebastian Lindau-Skands
+    slinda24@student.aau.dk
+"""
+
 import discord
 from discord.ext import commands
 import os

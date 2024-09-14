@@ -1,7 +1,7 @@
 """
     Command to create embeds for official announcements.
-    Sep 14 2024 @ 07:37
-    embeds.py v1
+    Sep 14 2024 @ 09:00
+    embeds.py v2
 
     Sebastian Lindau-Skands
     slinda24@student.aau.dk
