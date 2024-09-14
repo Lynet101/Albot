@@ -13,7 +13,7 @@ class ping(commands.Cog):
 
     @commands.slash_command(guild_ids=[gid], name="ping")
     async def ping(self, ctx):
-        await ctx.respond(f"Pong! {round(self.bot.latency * 1000)}ms", ephemeral=True, delete_after=3)
+        await ctx.respond(f"Pong! Roundtrip was: {round(self.bot.latency * 1000)}ms", ephemeral=True, delete_after=3)
 
 def setup(bot):
     bot.add_cog(ping(bot))
