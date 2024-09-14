@@ -30,7 +30,7 @@ class said(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(guild_ids=[gid], name="say")
+    @commands.slash_command(guild_ids=[gid], name="embed")
     async def modal_slash(self, ctx: discord.ApplicationContext):
         modal = MyModal(title="'What should i say?'")
         await ctx.send_modal(modal)
