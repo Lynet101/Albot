@@ -22,7 +22,10 @@ class Update(commands.Cog):
     @commands.slash_command(guild_ids=[gid], name='update')
     async def reload(self, ctx, module):
         try:
-            self.bot.unload_extension(module)
+            try:
+                self.bot.unload_extension(module)
+            except:
+                print(f"Failed to unload {module}, maybe it wasn't loaded.")
             self.bot.load_extension(module)
         except Exception as e:
             await ctx.respond(f"Error {e}", ephemeral=True, delete_after=3)
