@@ -19,7 +19,7 @@ class Update(commands.Cog):
     def __init__(self, bot):
         self.bot = bot  
 
-    @commands.slash_command(guild_ids=[gid], name='update')
+    @commands.slash_command(guild_ids=[gid], name='update', description='Updates specified module')
     async def reload(self, ctx, module):
         try:
             try:

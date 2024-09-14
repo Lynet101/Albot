@@ -13,20 +13,7 @@ import os
 from dotenv import load_dotenv
 
 bot = commands.Bot(command_prefix='/')
-"""
-# group_ext = ["commands.group.add", "commands.group.calendar", "commands.group.delete", "commands.group.new"]
-# personal_ext = ["commands.personal.email", "commands.personal.moodle", "commands.personal.office"]
-misc_ext = ["commands.misc.echo", "commands.misc.embeds", "commands.misc.ping", "commands.misc.update"]
 
-# for extension in group_ext:
-#   bot.load_extension(extension)
-
-# for extension in personal_ext:
-#   bot.load_extension(extension)
-
-for extension in misc_ext:
-    bot.load_extension(extension)
-"""
 categories = ["group", "personal", "misc"]
 for i in categories:
     for filename in os.listdir(f'./commands/{i}'):
@@ -39,7 +26,7 @@ for i in categories:
 @bot.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(bot))
-    await bot.change_presence(activity=discord.Game(name="AAU Team management"))
+    await bot.change_presence(activity=discord.Game(name="Serving the AAU | CCT-1 Class"))
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")

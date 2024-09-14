@@ -19,7 +19,7 @@ class Echo(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(guild_ids=[gid], name="echo", description="Echoes the provided message.")
+    @commands.slash_command(guild_ids=[gid], name="echo", description="Sends the provided message as Albot")
     async def echo(self, ctx: discord.ApplicationContext, message: str):
         await ctx.send(message)
         await ctx.respond("Success!", ephemeral=True, delete_after=3)  # Acknowledge the interaction
