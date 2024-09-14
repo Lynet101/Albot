@@ -14,9 +14,17 @@ from dotenv import load_dotenv
 
 bot = commands.Bot(command_prefix='/')
 
-extensions = ["commands.ping"]
+# group_ext = ["commands.group.add", "commands.group.calendar", "commands.group.delete", "commands.group.new"]
+# personal_ext = ["commands.personal.email", "commands.personal.moodle", "commands.personal.office"]
+misc_ext = ["commands.misc.echo", "commands.misc.embeds", "commands.misc.ping"]
 
-for extension in extensions:
+# for extension in group_ext:
+#   bot.load_extension(extension)
+
+# for extension in personal_ext:
+#   bot.load_extension(extension)
+
+for extension in misc_ext:
     bot.load_extension(extension)
 
 @bot.event
