@@ -1,7 +1,7 @@
 """
     Command to create embeds for official announcements.
-    Sep 14 2024 @ 09:00
-    embeds.py v2
+    Sep 16 2024 @ 19:20
+    embeds.py v2.1 - refactored
 
     Sebastian Lindau-Skands
     slinda24@student.aau.dk
@@ -9,11 +9,6 @@
 
 import discord
 from discord.ext import commands
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-gid = os.getenv('Guild_id')
 
 class MyModal(discord.ui.Modal):
     def __init__(self, *args, **kwargs) -> None:
@@ -30,7 +25,7 @@ class said(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(guild_ids=[gid], name="embed", description="Sends an embed with the provided title and content")
+    @commands.slash_command(name="embed", description="Sends an embed with the provided title and content")
     async def modal_slash(self, ctx: discord.ApplicationContext):
         modal = MyModal(title="'What should i say?'")
         await ctx.send_modal(modal)

@@ -9,11 +9,6 @@
 
 import discord
 from discord.ext import commands
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-gid = os.getenv('Guild_id')
 
 class Admin(commands.Cog):   
     def __init__(self, bot):
