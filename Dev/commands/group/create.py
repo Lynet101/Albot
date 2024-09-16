@@ -50,7 +50,6 @@ class Create(commands.Cog):
         }
 
         category = discord.utils.get(ctx.guild.categories, name="Group Rooms")
-        print(category)
 
         # create text and voice channels
         await ctx.guild.create_text_channel(f'g-{name}', overwrites=overwrites, category=category)
