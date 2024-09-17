@@ -9,10 +9,16 @@
 
 import discord
 from discord.ext import commands
+import echo.py
+import embeds.py
+import purge.py
+import update.py
+
 
 class Admin(commands.Cog):   
     def __init__(self, bot):
         self.bot = bot
+        
 
 def setup(bot):
     bot.add_cog(Admin(bot))

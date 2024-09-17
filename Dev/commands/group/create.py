@@ -1,13 +1,13 @@
 """
     Creates a new group with the given name and adds specified members.
     Sep 16 2024 @ 19:20
-    group.create.py v0.9 - refactored
+    group.create.py v1
 
     Sebastian Lindau-Skands
     slinda24@student.aau.dk
 """
 
-#Issues: ctx member object is succesfully obtained, but no other member objects are found.
+#Issues: Working with user ID, but not with tag
 import discord
 from discord.ext import commands
 
@@ -34,10 +34,10 @@ class Create(commands.Cog):
 
     async def add_members(self, ctx, role, members, name):
         mem_num = 0
-        members_tags = [tag.strip() for tag in members.split(",")]
+        members_ids = [id.strip() for id in members.split(",")]
         
-        for tag in members_tags:
-            member = discord.utils.get(ctx.guild.members, name=tag)
+        for member_id in members_ids:
+            member = await ctx.guild.fetch_member(member_id)
             if member:
                 await member.add_roles(role)
                 mem_num += 1

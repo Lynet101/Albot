@@ -20,13 +20,13 @@ for i in categories:
         if filename.endswith('.py'):
             try:
                 bot.load_extension(f'commands.{i}.{filename[:-3]}')
-            except:
-                print(f'Failed to load extension commands.{i}.{filename[:-3]}')
+            except Exception as exception:
+                print(f'Failed to load extension commands.{i}.{filename[:-3]} due to: {exception}')
 
 @bot.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(bot))
-    await bot.change_presence(activity=discord.Game(name="Serving the AAU | CCT-1 Class"))
+    await bot.change_presence(activity=discord.Game(name="Testing for the AAU CCT 24-27 Discord bot"))
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")

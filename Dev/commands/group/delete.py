@@ -1,43 +1,58 @@
 """
     Deletes all channels and roles related to a specific group.
-    Sep 16 2024 @ 19:20
-    group.delete.py v0.4 - refactored
+    Sep 17 2024 @ 15:20
+    group.delete.py v1
 
     Sebastian Lindau-Skands
     slinda24@student.aau.dk
 """
-
-# Issues: Everything and nothing all at once.
 import discord
 from discord.ext import commands
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+gid = int(os.getenv('Guild_id'))  # Ensure the guild ID is an integer
 
 class Delete(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(name='group_delete')
-    #main function
+    @commands.slash_command(guild_ids=[gid], name="group_delete")
     async def delete(self, ctx, name: str):
-        name = f'G-{name}'
-        if await self.delete_role(ctx, name) == 0:
-            await ctx.respond(f"Group role {name} has been deleted", ephemeral=True, delete_after=3)
-        else:
-            await ctx.respond(f"Group role {name} not found", ephemeral=True, delete_after=3)
-        await self.delete_channels(ctx, name)
-        await ctx.respond(f"Channels for group {name} have been deleted", ephemeral=True, delete_after=3)
-        
-    #sub functions
-    async def delete_role(self, ctx, name: str):
-        role = {discord.utils.get(ctx.guild.roles, name=name)}
+        role = discord.utils.get(ctx.guild.roles, name=f'G-{name}')
+        if not ctx.user in role.members:
+            await ctx.respond("You need to be part of this group, before you can delete the group.", ephemeral=True, delete_after=3)
+            print(f"Attempt at illegal group deletion by {ctx.author.name} ({ctx.author.id})")
+            return
+        await self.delete_role(ctx, f'G-{name}')
+        await self.delete_channels(ctx, f'g-{name}')
+        await self.delete_voice_channel(ctx, f'g-{name}')
+
+    async def delete_role(self, ctx, role_name: str):
+        role = discord.utils.get(ctx.guild.roles, name=role_name)
         if role:
             await role.delete()
+            await ctx.respond(f"Role {role_name} has been deleted.", ephemeral=True, delete_after=3)
         else:
-            return 1
-        return 0
+            await ctx.respond(f"Role {role_name} not found.", ephemeral=True, delete_after=3)
 
-    async def delete_channels(self, ctx, name: str):
-        channel = discord.utils.get(ctx.guild.channels, name=f'g-{name}')
-        await channel.delete()
+    async def delete_channels(self, ctx, text_channel_name: str):
+        text_channel = discord.utils.get(ctx.guild.text_channels, name=text_channel_name)
+        if text_channel:
+            await text_channel.delete()
+            await ctx.respond(f"Text channel {text_channel_name} has been deleted.", ephemeral=True, delete_after=3)
+        else:
+            await ctx.respond(f"Text channel {text_channel_name} not found.", ephemeral=True, delete_after=3)
+
+    async def delete_voice_channel(self, ctx, voice_channel_name: str):
+        voice_channel = discord.utils.get(ctx.guild.voice_channels, name=voice_channel_name)
+        if voice_channel:
+            await voice_channel.delete()
+            await ctx.respond(f"Voice channel {voice_channel_name} has been deleted.", ephemeral=True, delete_after=3)
+        else:
+            await ctx.respond(f"Voice channel {voice_channel_name} not found.", ephemeral=True, delete_after=3)
 
 def setup(bot):
     bot.add_cog(Delete(bot))
