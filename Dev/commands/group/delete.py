@@ -19,7 +19,7 @@ class Delete(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(guild_ids=[gid], name="group_delete")
+    @commands.slash_command(guild_ids=[gid], name="group_delete", description="Delete a group")
     async def delete(self, ctx, name: str):
         role = discord.utils.get(ctx.guild.roles, name=f'G-{name}')
         if not ctx.user in role.members:

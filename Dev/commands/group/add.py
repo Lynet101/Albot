@@ -22,7 +22,7 @@ class Add(commands.Cog):
         self.bot = bot
 
     #main command
-    @commands.slash_command(guild_ids=[gid], name = "group_add")
+    @commands.slash_command(guild_ids=[gid], name = "group_add", description="Add members to a group")
     async def add(self, ctx, name: str, members: str):
         role = discord.utils.get(ctx.guild.roles, name=f'G-{name}')
         if not ctx.user in role.members:

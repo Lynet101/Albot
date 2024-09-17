@@ -22,7 +22,7 @@ class Remove(commands.Cog):
         self.bot = bot
 
     #main command
-    @commands.slash_command(guild_ids=[gid], name = "group_remove")
+    @commands.slash_command(guild_ids=[gid], name = "group_remove", description = "remove members from a group")
     async def remove(self, ctx, name: str, members: str):
         role = discord.utils.get(ctx.guild.roles, name=f'G-{name}')
         if not ctx.user in role.members:

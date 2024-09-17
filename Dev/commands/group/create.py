@@ -16,7 +16,7 @@ class Create(commands.Cog):
         self.bot = bot
 
     #main command
-    @commands.slash_command(name = "group_create")
+    @commands.slash_command(name = "group_create", description = "create a new group")
     async def create(self, ctx, name: str, members: str):
         role = await self.create_role(ctx, name)
         await ctx.respond(f"The group by the name G-{name} has been created", ephemeral=True, delete_after=3)
