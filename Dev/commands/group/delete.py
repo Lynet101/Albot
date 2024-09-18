@@ -22,6 +22,9 @@ class Delete(commands.Cog):
     @commands.slash_command(guild_ids=[gid], name="group_delete", description="Delete a group")
     async def delete(self, ctx, name: str):
         role = discord.utils.get(ctx.guild.roles, name=f'G-{name}')
+        if not role:
+            await ctx.respond(f"Group G-{name} does not exist.", ephemeral=True, delete_after=3)
+            return
         if not ctx.user in role.members:
             await ctx.respond("You need to be part of this group, before you can delete the group.", ephemeral=True, delete_after=3)
             print(f"Attempt at illegal group deletion by {ctx.author.name} ({ctx.author.id})")
