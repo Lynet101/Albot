@@ -9,17 +9,11 @@
 import discord
 from discord.ext import commands
 
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-gid = int(os.getenv('Guild_id'))  # Ensure the guild ID is an integer
-
 class Delete(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(guild_ids=[gid], name="group_delete", description="Delete a group")
+    @commands.slash_command(name="group_delete", description="Delete a group")
     async def delete(self, ctx, name: str):
         role = discord.utils.get(ctx.guild.roles, name=f'G-{name}')
         if not role:

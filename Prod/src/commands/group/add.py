@@ -11,18 +11,12 @@
 import discord
 from discord.ext import commands
 
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-gid = int(os.getenv('Guild_id'))  # Ensure the guild ID is an integer
-
 class Add(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     #main command
-    @commands.slash_command(guild_ids=[gid], name = "group_add", description="Add members to a group")
+    @commands.slash_command(name = "group_add", description="Add members to a group")
     async def add(self, ctx, name: str, members: str):
         role = discord.utils.get(ctx.guild.roles, name=f'G-{name}')
         if not role:

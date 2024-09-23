@@ -11,18 +11,12 @@
 import discord
 from discord.ext import commands
 
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-gid = int(os.getenv('Guild_id'))  # Ensure the guild ID is an integer
-
 class Create(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     #main command
-    @commands.slash_command(guild_ids=[gid], name = "group_create", description = "create a new group")
+    @commands.slash_command(name = "group_create", description = "create a new group")
     async def create(self, ctx, name: str, members: str):
         role = await self.create_role(ctx, name)
         await ctx.respond(f"The group by the name G-{name} has been created", ephemeral=True, delete_after=3)

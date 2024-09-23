@@ -9,17 +9,12 @@
 
 import discord
 from discord.ext import commands
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-gid = os.getenv('Guild_id')
 
 class Update(commands.Cog):
     def __init__(self, bot):
         self.bot = bot  
 
-    @commands.slash_command(guild_ids=[gid], name='update', description='Updates specified module')
+    @commands.slash_command(name='update', description='Updates specified module')
     async def reload(self, ctx, module):
         try:
             try:
