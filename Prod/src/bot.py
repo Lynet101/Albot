@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 
 bot = commands.Bot(command_prefix='/')
 
-categories = ["Admin", "group", "personal", "misc"]
+categories = ["Admin", "group", "personal"]
 for i in categories:
     for filename in os.listdir(f'./commands/{i}'):
         if filename.endswith('.py'):
