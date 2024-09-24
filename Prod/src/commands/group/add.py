@@ -31,8 +31,7 @@ class Add(commands.Cog):
 
     async def add_members(self, ctx, role, members, name):
         mem_num = 0
-        members_ids = [id.strip() for id in members.split(",")]
-
+        members_ids = [int(id.strip().replace("<@", "").replace(">", "")) for id in members.split(",")]
         for member_id in members_ids:
             member = await ctx.guild.fetch_member(member_id)
             if member:
