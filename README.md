@@ -13,7 +13,7 @@
 - /admin echo {message} - Makes the bot say a message
 - /admin purge {amount} - Deletes x amount of messages from current channel (default 1)
 
-### Group commands (not implemented yet)
+### Group commands
 \# In order to use group commands, you must be member of the group (create is of course an exception to this)
 - /group create {name} {members_list (comma seperated)} - creates a new group
 - /group add {members_list (comma seperated)} - Adds members to group
