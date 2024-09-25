@@ -9,7 +9,7 @@ type Context<'a> = poise::Context<'a, Data, Error>;
 
 /// Responds with "world!"
 #[poise::command(prefix_command, slash_command, subcommands("echo", "ping"))]
-async fn admin() -> Result<(), Error> {
+async fn admin(ctx: Context<'_>) -> Result<(), Error> {
     Ok(())
 }
 
