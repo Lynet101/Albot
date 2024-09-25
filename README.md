@@ -3,6 +3,8 @@
 ### Custom Discord Bot for AAU CCT 24-27 line with integrated moodle and O365 support
 
 - - - - -
+# ALL OF THIS SHIT NEEDS SOME SERIOUS REFACTORING
+## and potentially complete rewritting in rust
 
 ## Commands
 
