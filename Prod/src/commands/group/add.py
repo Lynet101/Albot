@@ -18,6 +18,7 @@ class Add(commands.Cog):
     #main command
     @commands.slash_command(name = "group_add", description="Add members to a group")
     async def add(self, ctx, name: str, members: str):
+        name = name.replace(" ", "-")
         role = discord.utils.get(ctx.guild.roles, name=f'G-{name}')
         if not role:
             await ctx.respond(f"Group G-{name} does not exist.", ephemeral=True, delete_after=3)

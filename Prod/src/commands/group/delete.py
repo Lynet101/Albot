@@ -15,6 +15,7 @@ class Delete(commands.Cog):
 
     @commands.slash_command(name="group_delete", description="Delete a group")
     async def delete(self, ctx, name: str):
+        name = name.replace(" ", "-")
         role = discord.utils.get(ctx.guild.roles, name=f'G-{name}')
         if not role:
             await ctx.respond(f"Group G-{name} does not exist.", ephemeral=True, delete_after=3)
