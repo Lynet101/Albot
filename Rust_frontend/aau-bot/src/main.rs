@@ -1,31 +1,49 @@
 use anyhow::Context as _;
-use serenity::async_trait;
-use serenity::model::gateway::Ready;
-use serenity::prelude::*;
+use poise::serenity_prelude::{ClientBuilder, GatewayIntents};
 use shuttle_runtime::SecretStore;
-use tracing::info;
+use shuttle_serenity::ShuttleSerenity;
 
-struct Bot;
+struct Data {} // User data, which is stored and accessible in all command invocations
+type Error = Box<dyn std::error::Error + Send + Sync>;
+type Context<'a> = poise::Context<'a, Data, Error>;
 
-#[async_trait]
-impl EventHandler for Bot {
-    async fn ready(&self, _: Context, ready: Ready) {
-        info!("{} is connected!", ready.user.name);
-    }
+/// Responds with "world!"
+#[poise::command(slash_command)]
+async fn hello(ctx: Context<'_>) -> Result<(), Error> {
+    ctx.say("world!").await?;
+    Ok(())
+}
+
+#[poise::command(slash_command)]
+async fn echo(ctx: Context<'_>, #[description = "Makes the bot say inputes message"] message: String) -> Result<(), Error> {
+    ctx.say(message).await?;
+    Ok(())
 }
 
 #[shuttle_runtime::main]
-async fn serenity(
-    #[shuttle_runtime::Secrets] secrets: SecretStore,) -> shuttle_serenity::ShuttleSerenity {
-    let token = secrets
+async fn main(#[shuttle_runtime::Secrets] secret_store: SecretStore) -> ShuttleSerenity {
+    // Get the discord token set in `Secrets.toml`
+    let discord_token = secret_store
         .get("DISCORD_TOKEN")
         .context("'DISCORD_TOKEN' was not found")?;
 
-    let intents = GatewayIntents::all();
+    let framework = poise::Framework::builder()
+        .options(poise::FrameworkOptions {
+            commands: vec![hello(), echo()],
+            ..Default::default()
+        })
+        .setup(|ctx, _ready, framework| {
+            Box::pin(async move {
+                poise::builtins::register_globally(ctx, &framework.options().commands).await?;
+                Ok(Data {})
+            })
+        })
+        .build();
 
-    let client = Client::builder(&token, intents)
-        .event_handler(Bot).await
-        .expect("Err creating client");
+    let client = ClientBuilder::new(discord_token, GatewayIntents::non_privileged())
+        .framework(framework)
+        .await
+        .map_err(shuttle_runtime::CustomError::new)?;
 
     Ok(client.into())
 }
