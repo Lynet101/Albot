@@ -8,15 +8,20 @@ type Error = Box<dyn std::error::Error + Send + Sync>;
 type Context<'a> = poise::Context<'a, Data, Error>;
 
 /// Responds with "world!"
-#[poise::command(slash_command)]
-async fn hello(ctx: Context<'_>) -> Result<(), Error> {
-    ctx.say("world!").await?;
+#[poise::command(prefix_command, slash_command, subcommands("echo", "ping"))]
+async fn admin() -> Result<(), Error> {
     Ok(())
 }
 
 #[poise::command(slash_command)]
 async fn echo(ctx: Context<'_>, #[description = "Makes the bot say inputes message"] message: String) -> Result<(), Error> {
     ctx.say(message).await?;
+    Ok(())
+}
+
+#[poise::command(slash_command)]
+async fn ping(ctx: Context<'_>) -> Result<(), Error> {
+    ctx.say("pong!").await?;
     Ok(())
 }
 
@@ -29,7 +34,7 @@ async fn main(#[shuttle_runtime::Secrets] secret_store: SecretStore) -> ShuttleS
 
     let framework = poise::Framework::builder()
         .options(poise::FrameworkOptions {
-            commands: vec![hello(), echo()],
+            commands: vec![admin()],
             ..Default::default()
         })
         .setup(|ctx, _ready, framework| {
