@@ -2,28 +2,12 @@ use anyhow::Context as _;
 use poise::serenity_prelude::{ClientBuilder, GatewayIntents};
 use shuttle_runtime::SecretStore;
 use shuttle_serenity::ShuttleSerenity;
+mod commands;
+use crate::commands::admin_main;
 
 struct Data {} // User data, which is stored and accessible in all command invocations
 type Error = Box<dyn std::error::Error + Send + Sync>;
 type Context<'a> = poise::Context<'a, Data, Error>;
-
-/// Responds with "world!"
-#[poise::command(prefix_command, slash_command, subcommands("echo", "ping"))]
-async fn admin(_ctx: Context<'_>) -> Result<(), Error> {
-    Ok(())
-}
-
-#[poise::command(slash_command)]
-async fn echo(ctx: Context<'_>, #[description = "Makes the bot say inputes message"] message: String) -> Result<(), Error> {
-    ctx.say(message).await?;
-    Ok(())
-}
-
-#[poise::command(slash_command)]
-async fn ping(ctx: Context<'_>) -> Result<(), Error> {
-    ctx.say("pong!").await?;
-    Ok(())
-}
 
 #[shuttle_runtime::main]
 async fn main(#[shuttle_runtime::Secrets] secret_store: SecretStore) -> ShuttleSerenity {
@@ -34,7 +18,7 @@ async fn main(#[shuttle_runtime::Secrets] secret_store: SecretStore) -> ShuttleS
 
     let framework = poise::Framework::builder()
         .options(poise::FrameworkOptions {
-            commands: vec![admin()],
+            commands: vec![admin_main::admin()],
             ..Default::default()
         })
         .setup(|ctx, _ready, framework| {
