@@ -3,7 +3,6 @@ use poise::serenity_prelude::{ClientBuilder, GatewayIntents};
 use shuttle_runtime::SecretStore;
 use shuttle_serenity::ShuttleSerenity;
 mod commands;
-use crate::commands::admin_main;
 
 struct Data {} // User data, which is stored and accessible in all command invocations
 type Error = Box<dyn std::error::Error + Send + Sync>;
@@ -18,7 +17,7 @@ async fn main(#[shuttle_runtime::Secrets] secret_store: SecretStore) -> ShuttleS
 
     let framework = poise::Framework::builder()
         .options(poise::FrameworkOptions {
-            commands: vec![admin_main::admin()],
+            commands: vec![commands::admin_main::admin()],
             ..Default::default()
         })
         .setup(|ctx, _ready, framework| {
