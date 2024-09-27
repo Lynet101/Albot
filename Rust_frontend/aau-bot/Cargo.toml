@@ -6,6 +6,7 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0.66"
 poise = "0.6.1"
+serenity = "0.12.2"
 serenity-commands = "=0.5.1"
 shuttle-runtime = "0.47.0"
 shuttle-serenity = "0.47.0"
