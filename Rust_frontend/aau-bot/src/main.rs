@@ -4,7 +4,7 @@ use anyhow::Context as _;
 use poise::serenity_prelude::{ClientBuilder, GatewayIntents};
 use shuttle_runtime::SecretStore;
 use shuttle_serenity::ShuttleSerenity;
-use crate::commands::admin_main;
+use crate::commands::{admin_main, group_main};
 use crate::types::{Data};
 
 #[shuttle_runtime::main]
@@ -15,7 +15,7 @@ async fn main(#[shuttle_runtime::Secrets] secret_store: SecretStore) -> ShuttleS
 
     let framework = poise::Framework::builder()
         .options(poise::FrameworkOptions {
-            commands: vec![admin_main::admin()],
+            commands: vec![admin_main::admin(), group_main::group()],
             ..Default::default()
         })
         .setup(|ctx, _ready, framework| {
