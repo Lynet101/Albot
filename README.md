@@ -8,9 +8,9 @@
 
 ### Admin commands
 \# In order to access theese commands, you must be admin
-- /admin ping - Pings the bot
+- /admin ping - Pings the bot (rustified)
 - /admin embed - Creates an embed
-- /admin echo {message} - Makes the bot say a message
+- /admin echo {message} - Makes the bot say a message (rustified)
 - /admin purge {amount} - Deletes x amount of messages from current channel (default 1)
 
 ### Group commands (not implemented yet)
@@ -32,10 +32,4 @@
 - /calendar add {calendar} {event} {time} - adds event to specified calendar
 - /calendar remove {event} - removes event from specified
 - /calendar sync {calendar} - synchronises calendars (from groups and o365/moodle)
-
-### mail commands (not implemented yet)
-\# in order to access group features, you must be part of the group
-- /mail create - creates a new mail (pops up as embed)
-- /mail view - view mails
-- /mail sync - synchronises mail (from groups and o365/moodle)
  
