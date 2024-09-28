@@ -3,8 +3,10 @@
 ### Custom Discord Bot for AAU CCT 24-27 line with integrated moodle and O365 support
 
 - - - - -
-# ALL OF THIS SHIT NEEDS SOME SERIOUS REFACTORING
-## and potentially complete rewritting in rust
+## Anouncement
+Everything will be rewritten in rust, where it looks so much better. head over to the development branch to check it out!
+
+- - - - -
 
 ## Commands
 
@@ -34,10 +36,4 @@
 - /calendar add {calendar} {event} {time} - adds event to specified calendar
 - /calendar remove {event} - removes event from specified
 - /calendar sync {calendar} - synchronises calendars (from groups and o365/moodle)
-
-### mail commands (not implemented yet)
-\# in order to access group features, you must be part of the group
-- /mail create - creates a new mail (pops up as embed)
-- /mail view - view mails
-- /mail sync - synchronises mail (from groups and o365/moodle)
  
