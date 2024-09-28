@@ -1,10 +1,4 @@
-#[descord::command]
-pub async fn ping(message: Message) {
-    let start = std::time::Instant::now();
-    let reply = message.reply("Pong!").await;
-
-    reply.edit(format!(
-        "Pong! :ping_pong: `{}ms`",
-        start.elapsed().as_millis()
-    )).await;
+#[descord::slash]
+pub async fn ping(interaction: Interaction) {
+    interaction.reply("Pong!", true).await;
 }
