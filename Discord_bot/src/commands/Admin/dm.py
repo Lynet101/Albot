@@ -1,0 +1,13 @@
+from common_libs import *
+from common_funcs import dm as dm_func
+
+class DM(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.slash_command(name='dm')
+    async def dm(self, ctx, user: str, message: str):
+        dm_func(ctx, user, message)
+
+def setup(bot):
+    bot.add_cog(DM(bot))

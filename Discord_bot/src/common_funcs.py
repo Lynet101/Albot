@@ -10,4 +10,12 @@ async def add_members(ctx, role, members, name):
             await member.add_roles(role)
             mem_num += 1
     
-    return mem_num
+    return 
+    
+async def dm(ctx, user: str, message: str):
+    user = await self.bot.fetch_user(int(user.replace("<@", "").replace(">", "")))
+    try:
+        await user.send(message)
+        await ctx.respond(f"Sent a DM to {user.name}", ephemeral=True, delete_after=3)  # Acknowledge the interaction
+    except Exception as e:
+        await ctx.respond(f"Failed to send a DM: {e}", ephemeral=True, delete_after=3) # Acknowledge
