@@ -2,9 +2,7 @@
 ## AAU | CCT 24-27 Discord Bot
 ### Custom Discord Bot for AAU CCT 24-27 line with integrated moodle and O365 support
 - - - - -
-## Anouncement
 
-Everything will be rewritten in rust, where it looks so much better. Head over to the development branch to check it out
 
 ## Commands
 ### Admin commands
