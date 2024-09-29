@@ -7,8 +7,7 @@
     slinda24@student.aau.dk
 """
 
-import discord
-from discord.ext import commands
+from common_libs import *
 
 
 class ping(commands.Cog):

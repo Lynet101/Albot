@@ -7,8 +7,7 @@
     slinda24@student.aau.dk
 """
 
-import discord
-from discord.ext import commands
+from common_libs import *
 
 class Update(commands.Cog):
     def __init__(self, bot):

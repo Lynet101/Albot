@@ -6,8 +6,7 @@
     Sebastian Lindau-Skands
     slinda24@student.aau.dk
 """
-import discord
-from discord.ext import commands
+from common_libs import *
 
 class Delete(commands.Cog):
     def __init__(self, bot):
