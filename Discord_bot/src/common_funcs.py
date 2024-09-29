@@ -12,8 +12,7 @@ async def add_members(ctx, role, members, name):
     
     return 
     
-async def dm(ctx, user: str, message: str):
-    user = await self.bot.fetch_user(int(user.replace("<@", "").replace(">", "")))
+async def dm(ctx, user, message: str):
     try:
         await user.send(message)
         await ctx.respond(f"Sent a DM to {user.name}", ephemeral=True, delete_after=3)  # Acknowledge the interaction
