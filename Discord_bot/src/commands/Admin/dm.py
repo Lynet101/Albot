@@ -7,7 +7,8 @@ class DM(commands.Cog):
 
     @commands.slash_command(name='dm')
     async def dm(self, ctx, user: str, message: str):
-        dm_func(ctx, user, message)
+        user = await self.bot.fetch_user(int(user.replace("<@", "").replace(">", "")))
+        await dm_func(ctx, user, message)
 
 def setup(bot):
     bot.add_cog(DM(bot))
